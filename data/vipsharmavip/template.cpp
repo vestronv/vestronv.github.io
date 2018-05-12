@@ -1,0 +1,29 @@
+// copy From Here
+// need for speed...
+#include <bits/stdc++.h>
+using namespace std;
+// bad times...
+
+//.............template...................
+#define vimal
+#ifdef vimal
+
+#endif
+#define boost ios::sync_with_stdio(0);cin.tie(0);
+#define PB push_back
+#define MP make_pair
+typedef long long ll;
+//.............template...................
+
+//.............data...................
+const int N = 1005; // 10^3
+//.............data...................
+
+//.............functions...................
+//.............functions...................
+
+//.............main...................
+int main(){
+	boost;
+	return 0;
+	}
