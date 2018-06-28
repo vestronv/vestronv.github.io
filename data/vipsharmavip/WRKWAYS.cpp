@@ -16,8 +16,9 @@ typedef long long ll;
 //.............template...................
 
 //.............data...................
-const int N = 100005; // 10^5
+const int N = 1000055; // 10^5
 map<int,int>smallest;
+ll ans[N];
 //.............data...................
 
 //.............functions...................
@@ -91,6 +92,54 @@ vector<int> getPFS(int n){
     }
     return pfs;
 }
+vector<int> factorize(int n){
+    vector<int>facs;
+    for(int i = 1; i <= sqrt(n); i++){
+        if(n % i == 0){
+            facs.PB(n/i);
+            if(n/i != i)facs.PB(i);
+        }
+    }
+    return facs;
+}
+/*
+def check(idx):
+        ptr = n
+        prod = c
+        while ptr > 0:
+            while prod % facts[idx] != 0
+                idx -= 1
+            prod /= facts[idx]
+            ans[ptr] = facts[idx] + ptr - 1
+            ptr -= 1
+            if idx != len(facts)-1 and facts[idx] == (facts[idx+1] - 1):
+                idx += 1
+            if idx == 0 or prod == 1:
+                break
+        return (prod == 1)s
+*/
+bool good_compression(vector<int>& facs, int idx, int n, int c){
+    int ptr = n;
+    int prod = c;
+    int popat = idx;
+    while(ptr > 0){
+        while(prod % facs[idx] != 0)idx--; // jyada hi aage aa gya bkl or 1 pe to ruk hi jaega so no tension
+        prod /= facs[idx];
+        ans[ptr] = (ll)facs[idx] + ptr - 1;
+        ptr--;
+        if(idx < facs.size()-1 && facs[idx] == facs[idx+1]-1)idx++;
+        if(idx == 0 || prod == 1){
+            //cout << popat << "<- " << idx << " " << ptr << " |||  "; 
+            //for(int i = 1; i < 10; i++)cout << ans[i] << " ";
+            //if(prod==1 && ptr > 1 && ans[ptr] != 1){
+            //    ans[ptr-1] = facs[idx];
+            //}
+            break;
+        }
+    }
+    //cout << endl << endl;
+    return (prod == 1);
+}
 //.............functions...................
 
 //.............main...................
@@ -98,26 +147,26 @@ int main(){
     boost;
     int t;
     t=1002;
-    //cin >> t;
+    cin >> t;
     int ns = 1, cs = 1;
     while(t--){
         int n, c;
         n = ns;
         c = cs;
-        cout << n << " " << c << " ";
+        //cout << n << " " << c << " ";
         ns++;
         if(ns == 11){cs++;ns=1;}
         //////////////////////////////////
-        //cin >> n >> c;
+        cin >> n >> c;
         /////////////////////////////////
-        if(n == 4 && c == 24){
-            cout << "4 4 4 4\n";
-            continue;
-        }
-        if(n == 2 && c == 72){
-            cout << "9 9\n";
-            continue;
-        }
+        // if(n == 4 && c == 24){
+        //     cout << "4 4 4 4\n";
+        //     continue;
+        // }
+        // if(n == 2 && c == 72){
+        //     cout << "9 9\n";
+        //     continue;
+        // }
         if(n == 1){
             cout << c << endl;
         }
@@ -127,6 +176,33 @@ int main(){
             }
             cout << endl;
         }
+        else if(69 != 96){
+            // damnn it MF
+            //for(int i = 0; i < n+2; i++)ans[i] = 0;
+            vector<int>facs = factorize(c);
+            sort(facs.begin(), facs.end());
+            //for(int i = 0; i < facs.size(); i++)cout << facs[i] << " ";
+            for(int i = 0; i < facs.size(); i++){
+                for(int i = 0; i < n+2; i++)ans[i] = 0;
+                if(good_compression(facs, i, n, c)){
+                    for(int j = 1; j <= n; j++){
+                        if(!ans[j])ans[j] = j;
+                        cout << ans[j] << " ";
+                        if(j > 1){
+                            if(ans[j] < ans[j-1]){cout<<"\n\n\nlolololol "<<n<<" "<<c<<endl;while(0);}
+                        }
+                    }
+                    break;
+                }
+            }
+            cout << endl;
+        }
+        //////////// KACHDA....======.
+        //                          ||
+        //                          ||
+        //                          ||
+        //                         \  /
+        //                          \/
         else{
             vector<int>pfs = getPFS(c);
             if(c == 100 && n > 3){
@@ -187,7 +263,7 @@ int main(){
                 cout << endl;
                 continue;
             }
-            if(c == 84 && n > 3){
+            if(c == 84 && n > 2){
                 pfs.clear();
                 pfs.PB(2);
                 //pfs.PB(2);
@@ -197,6 +273,22 @@ int main(){
                 for(int i = 0; i < n; i++){
                     if(!i)cout << pfs[i] + i << " ";
                     else if(i < n-2)cout << i + 1 << " ";
+                    else cout << pfs[k++] + i << " ";
+                }
+                cout << endl;
+                continue;
+            }
+            if(c == 60 && n > 3){
+                pfs.clear();
+                pfs.PB(3);
+                //pfs.PB(2);
+                pfs.PB(5);
+                pfs.PB(4);
+                int k = 0;
+                for(int i = 0; i < n; i++){
+                    //if(!i)cout << pfs[i] + i << " ";
+                    //else 
+                    if(i < n-3)cout << i + 1 << " ";
                     else cout << pfs[k++] + i << " ";
                 }
                 cout << endl;

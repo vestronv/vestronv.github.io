@@ -7,4 +7,6 @@ are allowed and should in increasing order is C(r-l+1+n, n)-1
 in general to choose `k` elemets it is C(r-l+k, k) so for atmost `n` we add all
 1<=`k`<=`n`
 
+if given an array of numbers and we can swap 2 consecutive numbers than we can make any permutation out of it... 1 2 3 4 => 3 1 4 2 (1324,3124,3142)
+
 
