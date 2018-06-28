@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to another folder!</title>
+		<link rel="stylesheet" type="text/css" href="../../css/world.css">
+		<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+		<script type="text/javascript">
+			function setDeadlineDate() {
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth()+1; //January is 0!
+				var yyyy = today.getFullYear();
+				if(dd<10){
+					dd='0'+dd;
+				} 
+				if(mm<10){
+					mm='0'+mm;
+				}
+				var today = mm+'/'+dd+'/'+yyyy;
+				var today = new Date(today);
+				var deadline = new Date("12/05/2018");
+				var timeDiff = (deadline.getTime() - today.getTime());
+				var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+				if(timeDiff < 0)
+					document.getElementById("get-days").innerHTML = 'challenge over.';
+				else
+					document.getElementById("get-days").innerHTML = diffDays + ' days';
+			}
+		</script>
+	</head>
+
+<body onload="setDeadlineDate()">
+
+	<div class="prof-box-world">
+	<h1>Vimal Singh</h1>
+	<!-- navigation menu -->
+	<div id="navmenu">
+		<ul>
+		<li><a href="../../index.html">HOME</a></li>
+		<li><a href="#" style="text-decoration: none;">||</a></li>
+		<li><a href="../../data/resume.pdf" target="_blank">RESUME</a></li>
+		<li><a href="#" style="text-decoration: none;">||</a></li>
+		<li><a href="../stuff.html">STUFF</a></li>
+		<li><a href="#" style="text-decoration: none;">||</a></li>
+		<li><a href="../waste.html">WASTE</a></li>
+		<li><a href="#" style="text-decoration: none;">||</a></li>
+		<li><a href="../challenges.html">CHALLENGES</a></li>
+		</ul>
+	</div>
+	<p>
+	Hi, this is Vimal . . .<br />
+	</p>
+	<p id="challenge-p">
+	<u>Challenge</u>: Make muscular body, build stregnth, stamina.<br />
+	<u>Timeline</u>: Start Date = 2018-06-12, End-Date = 2018-12-05<br />
+	<u>Days-to-go</u>: <span id="get-days"></span><br />
+	<u>Status</u>: Running<br />
+	<u>Update</u>: <br />
+	</p>
+		<!-- Footer Start-->
+		<div class="social-icons">
+		<a href="https://www.facebook.com/adecemberguy" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+		<a href="https://www.github.com/vestronv" target="_blank"><i class="fa fa-github" aria-hidden="true"></i></a>
+		<a href="https://in.linkedin.com/in/vimalvestron" target="_blank"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+		</div>
+		<!-- Footer END -->
+	</div>
+
+</body>
+
+</html>
