@@ -1,0 +1,54 @@
+<html>
+	<head>
+	<title>Math Daily Quiz : CDS</title>
+	</head>
+<body>
+	<script type="text/javascript">
+		function load(){
+			var date = new Date();
+			document.getElementById("question-img").src = "images/img"+date.getDate()+(date.getMonth()+1)+date.getFullYear()+".jpg";
+			alert(document.getElementById("question-img").src);
+			document.getElementById("ansTB").style.display='block';
+			document.getElementById("submit").style.display='block';
+			}
+		function checkRes(){
+			var resp = document.getElementById("ansTB").value;
+			var res = resp.split(",");
+			var answers = "";
+			var rawFile = new XMLHttpRequest();
+			var date = new Date();
+			var file = "answer/ans"+date.getDate()+(date.getMonth()+1)+date.getFullYear()+".txt";
+			rawFile.open("GET", file, false);
+			rawFile.onreadystatechange = function ()
+			{
+				if(rawFile.readyState === 4)
+				{
+					if(rawFile.status === 200 || rawFile.status == 0)
+					{
+						var allText = rawFile.responseText;
+						alert(allText);
+						answers = allText;
+					}
+				}
+			}
+			rawFile.send(null);
+			var correct = 0;
+			var incorrect = 0;
+			var ansSplit = answers.split(",");
+			for(var item in res){
+				var cans = res[item];
+				var aans = ansSplit[item];
+				if(cans==aans)correct++;
+				else incorrect++;
+				}
+			alert(correct);
+			}
+	</script>
+	<h1>Math Quiz : 20 Questions 20 Minutes</h1>
+	<input type="button" value="LoadQuiz" onclick="load();" /><br/>
+	<input id="ansTB" type="text" style="display:none; height:50px; width:1000px" placeholder="Input answer here like: a,a,c,,d if answer for question 1,2,3 and 5 are 'a','a','c','d' and you don't know answer for question 4."/>
+	<input id="submit" type="button" style="display:none" value="Submit" onclick="checkRes();" />
+	<br/>
+	<img src="images/UPSC-CDS.jpg" id="question-img" alt="Questions" style="position:absolute; width:1300px; border:0;">
+</body>
+</html>
