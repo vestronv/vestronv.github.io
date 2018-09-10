@@ -7,12 +7,14 @@
 		function load(){
 			var date = new Date();
 			document.getElementById("question-img").src = "images/img"+date.getDate()+(date.getMonth()+1)+date.getFullYear()+".jpg";
-			alert(document.getElementById("question-img").src);
+			//alert(document.getElementById("question-img").src);
 			document.getElementById("ansTB").style.display='block';
 			document.getElementById("submit").style.display='block';
+			document.getElementById("infoTB").style.display='none';
 			}
 		function checkRes(){
 			var resp = document.getElementById("ansTB").value;
+			document.getElementById("infoTB").style.display='block';
 			var res = resp.split(",");
 			var answers = "";
 			var rawFile = new XMLHttpRequest();
@@ -26,7 +28,6 @@
 					if(rawFile.status === 200 || rawFile.status == 0)
 					{
 						var allText = rawFile.responseText;
-						alert(allText);
 						answers = allText;
 					}
 				}
@@ -35,20 +36,24 @@
 			var correct = 0;
 			var incorrect = 0;
 			var ansSplit = answers.split(",");
+			document.getElementById("infoTB").textContent  = "Incorrect Answers for Questions: ";
 			for(var item in res){
 				var cans = res[item];
 				var aans = ansSplit[item];
-				if(cans==aans)correct++;
-				else incorrect++;
+				var idx = Number(item)+1;
+				if(cans==aans){correct++;}
+				else {incorrect++; document.getElementById("infoTB").textContent  += (idx) + ", ";}
 				}
-			alert(correct);
+			document.getElementById("infoTB").textContent  += "\n" + "Correct: " + correct + ", Incorrect: " + incorrect;
 			}
 	</script>
 	<h1>Math Quiz : 20 Questions 20 Minutes</h1>
 	<input type="button" value="LoadQuiz" onclick="load();" /><br/>
 	<input id="ansTB" type="text" style="display:none; height:50px; width:1000px" placeholder="Input answer here like: a,a,c,,d if answer for question 1,2,3 and 5 are 'a','a','c','d' and you don't know answer for question 4."/>
+	<textarea rows="3" col="20" id="infoTB" style="display:none; width:400px" readonly></textarea><br/>
+	<!-- <textarea id="infoTB" style="display:none; height:50px; width:1000px" /><br/> -->
 	<input id="submit" type="button" style="display:none" value="Submit" onclick="checkRes();" />
 	<br/>
-	<img src="images/UPSC-CDS.jpg" id="question-img" alt="Questions" style="position:absolute; width:1300px; border:0;">
+	<img src="images/UPSC-CDS.jpg" id="question-img" alt="Questions" style="position:absolute; width:1300px; height:1000px; border:0;">
 </body>
 </html>
